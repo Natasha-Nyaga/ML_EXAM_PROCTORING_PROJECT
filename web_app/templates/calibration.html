@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Calibration</h2>
+<p class="small">Type the paragraph below and answer the sample MCQ. We record timings to build your baseline.</p>
+
+<p><b>Paragraph:</b> Artificial intelligence is transforming education by enabling personalized learning experiences.</p>
+<textarea id="typingArea" placeholder="Type the paragraph above..."></textarea>
+
+<div class="small">
+  <p><b>Q1:</b> Which is a programming language?</p>
+  <label><input type="radio" name="q1" value="Python"> Python</label>
+  <label><input type="radio" name="q1" value="Google"> Google</label>
+</div>
+
+<div style="margin-top:16px;">
+  <button class="btn" id="finishBtn">Finish Calibration & Go to Exam</button>
+  <div id="status" class="result-box"></div>
+</div>
+
+<script>
+const typingArea = document.getElementById('typingArea');
+let keystrokes = [];
+let mouseEvents = [];
+let lastMouseTime = null;
+
+typingArea.addEventListener('keydown', e => {
+  keystrokes.push({type:'down', key:e.key, ts: Date.now()});
+});
+typingArea.addEventListener('keyup', e => {
+  keystrokes.push({type:'up', key:e.key, ts: Date.now()});
+});
+
+document.addEventListener('mousemove', e => {
+  const ts = Date.now();
+  if (lastMouseTime) {
+    mouseEvents.push({type:'move', x:e.clientX, y:e.clientY, dt: ts - lastMouseTime, ts});
+  }
+  lastMouseTime = ts;
+});
+document.addEventListener('click', e => {
+  mouseEvents.push({type:'click', x:e.clientX, y:e.clientY, ts: Date.now()});
+});
+
+function getAnswers(){
+  return { q1: (document.querySelector('input[name="q1"]:checked')||{}).value || null };
+}
+
+document.getElementById('finishBtn').addEventListener('click', async () => {
+  const payload = {
+    student_id: "student123",
+    keystrokes: keystrokes,
+    mouse: mouseEvents,
+    answers: getAnswers(),
+    model: "isolation_forest"
+  };
+  document.getElementById('status').innerText = "Sending calibration...";
+  try {
+    const r = await fetch('/api/calibration', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await r.json();
+    document.getElementById('status').innerText = JSON.stringify(data);
+    // redirect to exam
+    setTimeout(()=> window.location.href = '/exam', 800);
+  } catch (err) {
+    document.getElementById('status').innerText = 'Error: '+err;
+  }
+});
+</script>
+{% endblock %}

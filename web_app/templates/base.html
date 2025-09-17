@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Proctoring</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header style="display:flex; justify-content:space-between; align-items:center;">
+      <h1>Exam Proctoring (demo)</h1>
+      <nav>
+        <a class="btn" href="/">Home</a>
+        <a class="btn" href="/calibration">Calibration</a>
+        <a class="btn" href="/exam">Exam</a>
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>
