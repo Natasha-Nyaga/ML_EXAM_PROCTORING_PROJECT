@@ -3,7 +3,6 @@
 <div class="exam-container">
   <h2>Online Examination</h2>
 
-  <!-- Exam Instructions -->
   <div class="instructions">
     <h3>Instructions:</h3>
     <ul>
@@ -20,8 +19,9 @@
     <span id="timer">30:00</span>
   </div>
 
-  <!-- Exam Questions -->
+  <!-- Questions -->
   <form id="examForm">
+    <!-- Mouse-heavy questions -->
     <div class="question">
       <p><b>Q1.</b> Which of the following is a machine learning algorithm?</p>
       <label><input type="radio" name="q1" value="Decision Tree"> Decision Tree</label><br>
@@ -29,8 +29,10 @@
     </div>
 
     <div class="question">
-      <p><b>Q2.</b> In cybersecurity, what does “phishing” mean?</p>
-      <textarea id="q2" name="q2" placeholder="Type your answer here..." rows="4"></textarea>
+      <p><b>Q2.</b> Which is the capital city of France?</p>
+      <label><input type="radio" name="q2" value="Berlin"> Berlin</label><br>
+      <label><input type="radio" name="q2" value="Paris"> Paris</label><br>
+      <label><input type="radio" name="q2" value="Madrid"> Madrid</label>
     </div>
 
     <div class="question">
@@ -39,162 +41,139 @@
       <label><input type="radio" name="q3" value="Excel"> Excel</label>
     </div>
 
+    <div class="question">
+      <p><b>Q4.</b> Who developed the theory of relativity?</p>
+      <label><input type="radio" name="q4" value="Newton"> Isaac Newton</label><br>
+      <label><input type="radio" name="q4" value="Einstein"> Albert Einstein</label><br>
+      <label><input type="radio" name="q4" value="Tesla"> Nikola Tesla</label>
+    </div>
+
+    <div class="question">
+      <p><b>Q5.</b> Which of these is NOT an operating system?</p>
+      <label><input type="radio" name="q5" value="Linux"> Linux</label><br>
+      <label><input type="radio" name="q5" value="Windows"> Windows</label><br>
+      <label><input type="radio" name="q5" value="Python"> Python</label>
+    </div>
+
+    <!-- Keystroke-heavy questions -->
+    <div class="question">
+      <p><b>Q6.</b> In cybersecurity, what does “phishing” mean?</p>
+      <textarea id="q6" name="q6" placeholder="Type your answer here..." rows="3"></textarea>
+    </div>
+
+    <div class="question">
+      <p><b>Q7.</b> Type the capital of Kenya.</p>
+      <input type="text" name="q7" placeholder="Your answer..." />
+    </div>
+
+    <div class="question">
+      <p><b>Q8.</b> What is 12 × 8?</p>
+      <input type="text" name="q8" placeholder="Your answer..." />
+    </div>
+
+    <div class="question">
+      <p><b>Q9.</b> Type the word <b>"integrity"</b> without mistakes.</p>
+      <input type="text" name="q9" />
+    </div>
+
+    <div class="question">
+      <p><b>Q10.</b> Type the sentence: <i>"I will not cheat in exams."</i></p>
+      <textarea name="q10" rows="2"></textarea>
+    </div>
+
+    <div class="question">
+      <p><b>Q11.</b> Explain why firewalls are important in network security.</p>
+      <textarea name="q11" rows="3"></textarea>
+    </div>
+
+    <div class="question">
+      <p><b>Q12.</b> Type the first three prime numbers separated by commas.</p>
+      <input type="text" name="q12" placeholder="e.g. 2, 3, 5" />
+    </div>
+
     <button type="submit" id="submitExambtn" class="btn">Submit Exam</button>
   </form>
 
-  <!-- Live Monitoring Status -->
+  <!-- Live Monitoring -->
   <div id="exam-status" class="result-box">Exam monitoring active...</div>
 </div>
 
 <style>
-.exam-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-.instructions {
-  background: #000000;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-}
-.timer-box {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #d9534f;
-}
-.question {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: #000000;
-  border-radius: 8px;
-}
-.btn {
-  background: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: none;
-}
-.result-box {
-  margin-top: 20px;
-  padding: 10px;
-  background: rgb(36, 122, 57);
-  border-radius: 6px;
-  color: white;
-}
+.exam-container { max-width: 800px; margin: auto; padding: 20px; }
+.instructions { background: #000; padding: 15px; margin-bottom: 20px; border-radius: 8px; color: white; }
+.timer-box { font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #d9534f; }
+.question { margin-bottom: 20px; padding: 15px; background: #000; border-radius: 8px; color: white; }
+.btn { background: #6a0dad; color: white; padding: 10px 20px; border-radius: 6px; border: none; }
+.btn:hover { background: #4b0082; }
+.result-box { margin-top: 20px; padding: 10px; background: rgb(36, 122, 57); border-radius: 6px; color: white; }
 </style>
 
 <script>
-// Timer (30 mins countdown)
-let timeLeft = 30 * 60; // seconds
+// Timer
+let timeLeft = 30 * 60;
 const timerEl = document.getElementById("timer");
-
 function updateTimer() {
   let minutes = Math.floor(timeLeft / 60);
   let seconds = timeLeft % 60;
   timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  if (timeLeft > 0) {
-    timeLeft--;
-  } else {
-    alert("Time is up! Submitting your exam.");
-    document.getElementById("examForm").submit();
-  }
+  if (timeLeft > 0) timeLeft--;
+  else document.getElementById("examForm").submit();
 }
 setInterval(updateTimer, 1000);
 
-// --- Activity Monitoring (keystrokes + mouse) ---
+// Activity Monitoring
 let keystrokes = [];
 let mouseEvents = [];
 let lastMouseTime = null;
 
-document.addEventListener('keydown', e => {
-  keystrokes.push({type:'down', key:e.key, ts: Date.now()});
-});
-document.addEventListener('keyup', e => {
-  keystrokes.push({type:'up', key:e.key, ts: Date.now()});
-});
+document.addEventListener('keydown', e => { keystrokes.push({type:'down', key:e.key, ts: Date.now()}); });
+document.addEventListener('keyup', e => { keystrokes.push({type:'up', key:e.key, ts: Date.now()}); });
 
 document.addEventListener('mousemove', e => {
   const ts = Date.now();
-  if (lastMouseTime) {
-    mouseEvents.push({type:'move', x:e.clientX, y:e.clientY, dt: ts - lastMouseTime, ts});
-  }
+  if (lastMouseTime) mouseEvents.push({type:'move', x:e.clientX, y:e.clientY, dt: ts - lastMouseTime, ts});
   lastMouseTime = ts;
 });
-document.addEventListener('click', e => {
-  mouseEvents.push({type:'click', x:e.clientX, y:e.clientY, ts: Date.now()});
-});
+document.addEventListener('click', e => { mouseEvents.push({type:'click', x:e.clientX, y:e.clientY, ts: Date.now()}); });
 
-// Send monitoring data every 1 min
+// Send monitoring data every 60s
 async function sendActivity() {
-  const payload = {
-    student_id: "student123",
-    keystrokes: keystrokes,
-    mouse: mouseEvents,
-    timestamp: Date.now()
-  };
-
+  const payload = { student_id:"student123", keystrokes, mouse:mouseEvents, timestamp:Date.now() };
   try {
     const r = await fetch('/api/exam/monitor', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
     });
     const data = await r.json();
-    document.getElementById('exam-status').innerText =
-      `Last check (${new Date().toLocaleTimeString()}): ${data.status}`;
-
-    keystrokes = [];
-    mouseEvents = [];
+    document.getElementById('exam-status').innerText = `Last check (${new Date().toLocaleTimeString()}): ${data.status}`;
+    keystrokes = []; mouseEvents = [];
   } catch (err) {
     document.getElementById('exam-status').innerText = 'Error sending activity';
   }
 }
-setInterval(sendActivity, 60 * 1000);
+setInterval(sendActivity, 60*1000);
 
-// Handle exam submission
+// Submit Exam
 document.getElementById("submitExambtn").addEventListener("click", async (e) => {
   e.preventDefault();
-
-  const answers = {
-    q1: (document.querySelector('input[name="q1"]:checked') || {}).value || null,
-    q2: document.getElementById("q2").value || null,
-    q3: (document.querySelector('input[name="q3"]:checked') || {}).value || null
-  };
-
-  try {
-    const res = await fetch("/api/exam/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ student_id: "student123", answers })
-    });
-
-    const data = await res.json();
-
-    if (data.redirect) {
-      window.location.href = data.redirect;
-    } else {
-      alert("Submission failed: " + (data.error || "Unknown error"));
-    }
-  } catch (err) {
-    alert("Error submitting exam: " + err);
-  }
+  const formData = new FormData(document.getElementById("examForm"));
+  const answers = {};
+  for (const [key, value] of formData.entries()) { answers[key] = value; }
+  const res = await fetch("/api/exam/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ session_id: "{{ session_id }}", answers, keystrokes, mouseEvents})
+  });
+  const data = await res.json();
+  if (data.redirect) window.location.href = data.redirect;
+  else alert("Submission failed: " + (data.error || "Unknown error"));
 });
 </script>
 
-<!-- Socket.IO for real-time flagging -->
+<!-- Socket.IO for real-time flags -->
 <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
 <script>
   const socket = io();
-
-  socket.on("connect", () => {
-    console.log("Connected to server for monitoring");
-  });
-
   socket.on("cheating_flag", (data) => {
-    console.log("Flag received:", data);
     document.getElementById("exam-status").innerText =
       `⚠️ Cheating flag at ${new Date().toLocaleTimeString()}: ${data.message}`;
     alert("⚠️ Cheating flag: " + data.message);

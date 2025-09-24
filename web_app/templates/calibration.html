@@ -1,72 +1,243 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Calibration</h2>
-<p class="small">Type the paragraph below and answer the sample MCQ. We record timings to build your baseline.</p>
+<div class="calibration-container">
+  <h2>Calibration Phase</h2>
+  <p>Please complete these tasks carefully. Your behavior will be recorded to establish a baseline for the exam.</p>
 
-<p><b>Paragraph:</b> Artificial intelligence is transforming education by enabling personalized learning experiences.</p>
-<textarea id="typingArea" placeholder="Type the paragraph above..."></textarea>
+  <!-- Timer -->
+  <div class="timer-box">
+    <span>Time Remaining: </span>
+    <span id="timer">10:00</span>
+  </div>
 
-<div class="small">
-  <p><b>Q1:</b> Which is a programming language?</p>
-  <label><input type="radio" name="q1" value="Python"> Python</label>
-  <label><input type="radio" name="q1" value="Google"> Google</label>
+  <form id="calibrationForm">
+
+    <!-- Mouse Tracking: Vertical MCQ -->
+    <div class="question">
+      <p><b>Q1.</b> Which of the following is a fruit?</p>
+      <label><input type="radio" name="q1" value="Apple"> Apple</label><br>
+      <label><input type="radio" name="q1" value="Car"> Car</label><br>
+      <label><input type="radio" name="q1" value="House"> House</label>
+    </div>
+
+    <!-- Mouse Tracking: Horizontal MCQ -->
+    <div class="question">
+      <p><b>Q2.</b> Which one is a programming language?</p>
+      <div class="options-inline">
+        <label><input type="radio" name="q2" value="Python"> Python</label>
+        <label><input type="radio" name="q2" value="Banana"> Banana</label>
+        <label><input type="radio" name="q2" value="Chair"> Chair</label>
+      </div>
+    </div>
+
+    <!-- Mouse Tracking: Scattered Layout -->
+   
+
+    <!-- More Vertical -->
+    <div class="question">
+      <p><b>Q4.</b> Which number is even?</p>
+      <label><input type="radio" name="q4" value="3"> 3</label><br>
+      <label><input type="radio" name="q4" value="8"> 8</label><br>
+      <label><input type="radio" name="q4" value="15"> 15</label>
+    </div>
+
+    <!-- More Horizontal -->
+    <div class="question">
+      <p><b>Q5.</b> Which planet is closest to the Sun?</p>
+      <div class="options-inline">
+        <label><input type="radio" name="q5" value="Mercury"> Mercury</label>
+        <label><input type="radio" name="q5" value="Venus"> Venus</label>
+        <label><input type="radio" name="q5" value="Mars"> Mars</label>
+      </div>
+    </div>
+
+    <!-- Typing Task 1: Transcription -->
+    <div class="question">
+      <p><b>Q6.</b> Type the following exactly:  
+        <i>Cybersecurity is everyone’s responsibility.</i>
+      </p>
+      <textarea id="q6" name="q6" rows="2" placeholder="Type here..."></textarea>
+    </div>
+
+    <!-- Typing Task 2: Recall -->
+    <div class="question">
+      <p><b>Q7.</b> In your own words, explain what encryption means.</p>
+      <textarea id="q7" name="q7" rows="3" placeholder="Type your explanation..."></textarea>
+    </div>
+
+    <!-- Typing Task 3: Recall -->
+    <div class="question">
+      <p><b>Q8.</b> Why is it important to use strong passwords?</p>
+      <textarea id="q8" name="q8" rows="3" placeholder="Type your answer..."></textarea>
+    </div>
+
+    <button type="submit" class="btn">Submit Calibration</button>
+  </form>
+
+  <div id="calibration-status" class="result-box">Calibration in progress...</div>
 </div>
 
-<div style="margin-top:16px;">
-  <button class="btn" id="finishBtn">Finish Calibration & Go to Exam</button>
-  <div id="status" class="result-box"></div>
-</div>
+<style>
+.calibration-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: #000;
+  color: #fff;
+  border-radius: 10px;
+  text-align: left; /* Left align everything */
+}
+
+h2, p, label {
+  text-align: left;
+}
+
+.timer-box {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: red;
+}
+
+.question {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #111;
+  border-radius: 8px;
+}
+
+.options-inline label {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+textarea {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.btn {
+  background: purple;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+}
+
+.result-box {
+  margin-top: 20px;
+  padding: 10px;
+  background: green;
+  border-radius: 6px;
+  color: white;
+}
+</style>
 
 <script>
-const typingArea = document.getElementById('typingArea');
 let keystrokes = [];
 let mouseEvents = [];
 let lastMouseTime = null;
 
-typingArea.addEventListener('keydown', e => {
-  keystrokes.push({type:'down', key:e.key, ts: Date.now()});
+// Timer (10 mins)
+let timeLeft = 10 * 60;
+const timerEl = document.getElementById("timer");
+function updateTimer() {
+  let minutes = Math.floor(timeLeft / 60);
+  let seconds = timeLeft % 60;
+  timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  if (timeLeft > 0) timeLeft--;
+}
+setInterval(updateTimer, 1000);
+
+// Capture keystrokes
+document.addEventListener("keydown", e => {
+  keystrokes.push({ type: "down", key: e.key, ts: Date.now() });
 });
-typingArea.addEventListener('keyup', e => {
-  keystrokes.push({type:'up', key:e.key, ts: Date.now()});
+document.addEventListener("keyup", e => {
+  keystrokes.push({ type: "up", key: e.key, ts: Date.now() });
 });
 
-document.addEventListener('mousemove', e => {
+// Capture mouse
+document.addEventListener("mousemove", e => {
   const ts = Date.now();
   if (lastMouseTime) {
-    mouseEvents.push({type:'move', x:e.clientX, y:e.clientY, dt: ts - lastMouseTime, ts});
+    mouseEvents.push({
+      type: "move",
+      x: e.clientX,
+      y: e.clientY,
+      dt: ts - lastMouseTime,
+      ts
+    });
   }
   lastMouseTime = ts;
 });
-document.addEventListener('click', e => {
-  mouseEvents.push({type:'click', x:e.clientX, y:e.clientY, ts: Date.now()});
+document.addEventListener("click", e => {
+  mouseEvents.push({ type: "click", x: e.clientX, y: e.clientY, ts: Date.now() });
 });
 
-function getAnswers(){
-  return { q1: (document.querySelector('input[name="q1"]:checked')||{}).value || null };
-}
+// Submit calibration
+document.getElementById("calibrationForm").addEventListener("submit", async e => {
+  e.preventDefault();
 
-document.getElementById('finishBtn').addEventListener('click', async () => {
-  const payload = {
-    student_id: "student123",
-    keystrokes: keystrokes,
-    mouse: mouseEvents,
-    answers: getAnswers(),
-    model: "isolation_forest"
+  const answers = {
+    q1: (document.querySelector('input[name="q1"]:checked') || {}).value || null,
+    q2: (document.querySelector('input[name="q2"]:checked') || {}).value || null,
+    q3: (document.querySelector('input[name="q3"]:checked') || {}).value || null,
+    q4: (document.querySelector('input[name="q4"]:checked') || {}).value || null,
+    q5: (document.querySelector('input[name="q5"]:checked') || {}).value || null,
+    q6: document.getElementById("q6").value,
+    q7: document.getElementById("q7").value,
+    q8: document.getElementById("q8").value
   };
-  document.getElementById('status').innerText = "Sending calibration...";
+
   try {
-    const r = await fetch('/api/calibration', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
+    const res = await fetch("/api/calibration/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ student_id: "student123", answers, keystrokes, mouseEvents })
     });
-    const data = await r.json();
-    document.getElementById('status').innerText = JSON.stringify(data);
-    // redirect to exam
-    setTimeout(()=> window.location.href = '/exam', 800);
+    const data = await res.json();
+    if (data.redirect) {
+      window.location.href = data.redirect;
+    } else {
+      document.getElementById("calibration-status").innerText = "Error saving calibration.";
+    }
   } catch (err) {
-    document.getElementById('status').innerText = 'Error: '+err;
+    document.getElementById("calibration-status").innerText = "Error submitting calibration.";
   }
 });
+
+
+function submitExam() {
+    const answers = {};
+    document.querySelectorAll("input[type=radio]:checked, textarea").forEach(el => {
+        answers[el.name] = el.value;
+    });
+
+    fetch("/submit_exam", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(answers)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            window.location.href = "/thankyou";
+        } else {
+            alert("Error submitting exam.");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error sending activity.");
+    });
+}
+
 </script>
 {% endblock %}
