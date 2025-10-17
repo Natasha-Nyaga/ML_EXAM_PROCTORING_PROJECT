@@ -1,0 +1,41 @@
+#  [1] "(Intercept)"                              
+#  [2] "classifierOutlierCount"                   
+#  [3] "classifierMahalanobis"                    
+#  [4] "classifierKNN"                            
+#  [5] "classifierMahalanobisKNN"                 
+#  [6] "classifierKMeans"                         
+#  [7] "classifierSVM"                            
+#  [8] "usergenderFemale"                         
+#  [9] "impgenderFemale"                          
+# [10] "userstyleTouch"                           
+# [11] "impstyleTouch"                            
+# [12] "classifierOutlierCount:usergenderFemale"  
+# [13] "classifierMahalanobis:usergenderFemale"   
+# [14] "classifierKNN:usergenderFemale"           
+# [15] "classifierMahalanobisKNN:usergenderFemale"
+# [16] "classifierKMeans:usergenderFemale"        
+# [17] "classifierSVM:usergenderFemale"           
+# [18] "usergenderFemale:impgenderFemale"         
+# [19] "userstyleTouch:impstyleTouch"             
+
+base OutCount Mahalan KNN MahalKNN KMeans SVM usrFem impFem usrTouch impTouch OutCount:usrFem Mahalan:usrFem KNN:usrFem MahalKNN:usrFem KMeans:usrFem SVM:usrFem usrFem:impFem usrTouch:impTouch
+
+# Test pairwise contrasts among userstyle and impostorstyle
+#                               1           5             10             15          19
+usrTouch-base	    		0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0
+impTouch-base	    		0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0
+usrTouch:impTouch-base	    	0  0  0  0  0  0  0  0  0  1  1  0  0  0  0  0  0  0  1
+usrTouch-impTouch	        0  0  0  0  0  0  0  0  0  1 -1  0  0  0  0  0  0  0  0
+usrTouch:impTouch-usrTouch 	0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  1
+usrTouch:impTouch-impTouch 	0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  1
+
+# Test whether each classifier is different depending on the genuine user gender
+#                               1           5             10             15          19
+usrFem-base	    		0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0
+usrFem:OutCount-OutCount	0  0  0  0  0  0  0  1  0  0  0  1  0  0  0  0  0  0  0
+usrFem:Mahalan-Mahalan		0  0  0  0  0  0  0  1  0  0  0  0  1  0  0  0  0  0  0
+usrFem:KNN-KNN			0  0  0  0  0  0  0  1  0  0  0  0  0  1  0  0  0  0  0
+usrFem:MahalKNN-MahalKNN	0  0  0  0  0  0  0  1  0  0  0  0  0  0  1  0  0  0  0
+usrFem:KMeans-KMeans		0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  1  0  0  0
+usrFem:SVM-SVM			0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  1  0  0
+

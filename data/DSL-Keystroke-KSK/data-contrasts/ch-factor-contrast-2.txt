@@ -1,0 +1,127 @@
+#  [1] "(Intercept)"                                            
+#  [2] "classifierMahalanobisKNN"                               
+#  [3] "classifierSVM"                                          
+#  [4] "datasetSimple"                                          
+#  [5] "datasetNumber"                                          
+#  [6] "trainamt25"                                             
+#  [7] "trainamt50"                                             
+#  [8] "trainamt100"                                            
+#  [9] "updatingTRUE"                                           
+# [10] "ntestpsrs151:200"                                       
+# [11] "classifierMahalanobisKNN:datasetSimple"                 
+# [12] "classifierSVM:datasetSimple"                            
+# [13] "classifierMahalanobisKNN:datasetNumber"                 
+# [14] "classifierSVM:datasetNumber"                            
+# [15] "classifierMahalanobisKNN:trainamt25"                    
+# [16] "classifierSVM:trainamt25"                               
+# [17] "classifierMahalanobisKNN:trainamt50"                    
+# [18] "classifierSVM:trainamt50"                               
+# [19] "classifierMahalanobisKNN:trainamt100"                   
+# [20] "classifierSVM:trainamt100"                              
+# [21] "datasetSimple:trainamt25"                               
+# [22] "datasetNumber:trainamt25"                               
+# [23] "datasetSimple:trainamt50"                               
+# [24] "datasetNumber:trainamt50"                               
+# [25] "datasetSimple:trainamt100"                              
+# [26] "datasetNumber:trainamt100"                              
+# [27] "classifierMahalanobisKNN:updatingTRUE"                  
+# [28] "classifierSVM:updatingTRUE"                             
+# [29] "datasetSimple:updatingTRUE"                             
+# [30] "datasetNumber:updatingTRUE"                             
+# [31] "classifierMahalanobisKNN:ntestpsrs151:200"              
+# [32] "classifierSVM:ntestpsrs151:200"                         
+# [33] "datasetSimple:ntestpsrs151:200"                         
+# [34] "datasetNumber:ntestpsrs151:200"                         
+# [35] "classifierMahalanobisKNN:datasetSimple:trainamt25"      
+# [36] "classifierSVM:datasetSimple:trainamt25"                 
+# [37] "classifierMahalanobisKNN:datasetNumber:trainamt25"      
+# [38] "classifierSVM:datasetNumber:trainamt25"                 
+# [39] "classifierMahalanobisKNN:datasetSimple:trainamt50"      
+# [40] "classifierSVM:datasetSimple:trainamt50"                 
+# [41] "classifierMahalanobisKNN:datasetNumber:trainamt50"      
+# [42] "classifierSVM:datasetNumber:trainamt50"                 
+# [43] "classifierMahalanobisKNN:datasetSimple:trainamt100"     
+# [44] "classifierSVM:datasetSimple:trainamt100"                
+# [45] "classifierMahalanobisKNN:datasetNumber:trainamt100"     
+# [46] "classifierSVM:datasetNumber:trainamt100"                
+# [47] "classifierMahalanobisKNN:datasetSimple:ntestpsrs151:200"
+# [48] "classifierSVM:datasetSimple:ntestpsrs151:200"           
+# [49] "classifierMahalanobisKNN:datasetNumber:ntestpsrs151:200"
+# [50] "classifierSVM:datasetNumber:ntestpsrs151:200"           
+
+base MKNN SVM Sim Num tamt25 tamt50 tamt100 upd impfam MKNN:Sim SVM:Sim MKNN:Num SVM:Num MKNN:tamt25 SVM:tamt25 MKNN:tamt50 SVM:tamt50 MKNN:tamt100 SVM:tamt100 Sim:tamt25 Num:tamt25 Sim:tamt50 Num:tamt50 Sim:tamt100 Num:tamt100 MKNN:upd SVM:upd Simple:upd Num:upd MKNN:impfam SVM:impfam Sim:impfam Num:impfam MKNN:Sim:tamt25 SVM:Sim:tamt25 MKNN:Num:tamt25 SVM:Num:tamt25 MKNN:Sim:tamt50 SVM:Sim:tamt50 MKNN:Num:tamt50 SVM:Num:tamt50 MKNN:Sim:tamt100 SVM:Sim:tamt100 MKNN:Num:tamt100 SVM:Num:tamt100 MKNN:Sim:impfam SVM:Sim:impfam MKNN:Num:impfam SVM:Num:impfam
+
+# Test effect of increasing amounts of training on impostor
+# familiarity for each classifier and data set combination (with
+# updating=FALSE and impfam=none).
+
+#                          1           5             10             15             20             25             30             35             40             45             50
+#                          0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+
+"5-25 | ScaleMan:Strong"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | ScaleMan:Strong"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | ScaleMan:Strong" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"5-25 | MahalKNN:Strong"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0 -1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | MahalKNN:Strong"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  1	0 -1  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | MahalKNN:Strong" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  1  0	-1  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"5-25 | SVM:Strong"        0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0 -1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | SVM:Strong"  	   0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	1  0 -1	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | SVM:Strong" 	   0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  1	 0 -1  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+
+"5-25 | ScaleMan:Simple"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0 -1  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | ScaleMan:Simple"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  1  0 -1	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | ScaleMan:Simple" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  1	0 -1  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"5-25 | MahalKNN:Simple"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0 -1	0  0  0	 0  0 -1  0  0	0  0  0	 0  0  0  0  0	0  0  0 -1  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | MahalKNN:Simple"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  1	0 -1  0	 0  0  1  0 -1	0  0  0	 0  0  0  0  0	0  0  0  1  0  0  0 -1	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | MahalKNN:Simple" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  1  0	-1  0  0  0  1	0 -1  0	 0  0  0  0  0	0  0  0  0  0  0  0  1	0  0  0	-1  0  0  0  0  0  0  0
+"5-25 | SVM:Simple"   	   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0 -1  0  0	 0  0 -1  0  0	0  0  0	 0  0  0  0  0	0  0  0  0 -1  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | SVM:Simple"  	   0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	1  0 -1	 0  0  1  0 -1	0  0  0	 0  0  0  0  0	0  0  0  0  1  0  0  0 -1  0  0	 0  0  0  0  0  0  0  0
+"50-100 | SVM:Simple" 	   0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  1	 0 -1  0  0  1	0 -1  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	1  0  0	 0 -1  0  0  0  0  0  0
+
+"5-25 | ScaleMan:Number"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | ScaleMan:Number"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  1  0 -1  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"50-100 | ScaleMan:Number" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	1  0 -1	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"5-25 | MahalKNN:Number"   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0 -1	0  0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0  0  0 -1  0  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | MahalKNN:Number"  0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  1	0 -1  0	 0  0  0  1  0 -1  0  0	 0  0  0  0  0	0  0  0  0  0  1  0  0	0 -1  0	 0  0  0  0  0  0  0  0
+"50-100 | MahalKNN:Number" 0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  1  0	-1  0  0  0  0	1  0 -1	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  1  0	 0  0 -1  0  0  0  0  0
+"5-25 | SVM:Number"   	   0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0 -1  0  0	 0  0  0 -1  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0 -1  0	0  0  0	 0  0  0  0  0  0  0  0
+"25-50 | SVM:Number"  	   0  0	 0  0  0  1 -1	0  0  0	 0  0  0  0  0	1  0 -1	 0  0  0  1  0 -1  0  0	 0  0  0  0  0	0  0  0  0  0  0  1  0	0  0 -1	 0  0  0  0  0  0  0  0
+"50-100 | SVM:Number" 	   0  0	 0  0  0  0  1 -1  0  0	 0  0  0  0  0	0  0  1	 0 -1  0  0  0	1  0 -1	 0  0  0  0  0	0  0  0  0  0  0  0  0	0  0  1	 0  0  0 -1  0  0  0  0
+
+# Test effect of familiar impostor on each classifier/dataset
+# combination (with updating=FALSE and trainamt=5).
+
+#                            1           5             10             15             20             25             30             35             40             45             50
+#                            0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+
+"impfam | ScaleMan:Strong"   0	0  0  0  0  0  0  0  0  1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"impfam | MahalKNN:Strong"   0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  1  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"impfam | SVM:Strong"	     0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  1  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+
+"impfam | ScaleMan:Simple"   0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  1	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"impfam | MahalKNN:Simple"   0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  1  0  1	0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0	0
+"impfam | SVM:Simple"	     0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  1  1	0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0	0
+
+"impfam | ScaleMan:Number"   0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"impfam | MahalKNN:Number"   0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  1  0  0	1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1	0
+"impfam | SVM:Number"	     0	0  0  0  0  0  0  0  0	1  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  1  0	1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	1
+
+# Test effect of updating on each classifier with baseline data set,
+# amount of training, etc.
+
+#                            1           5             10             15             20             25             30             35             40             45             50
+#                            0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+
+"update | ScaleMan"   	     0	0  0  0  0  0  0  0  1  0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"update | MahalKNN"   	     0	0  0  0  0  0  0  0  1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  1  0	 0  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"update | SVM"	     	     0	0  0  0  0  0  0  0  1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  1	 0  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+
+# Test effect of updating on each data set with baseline classifier
+# amount of training, etc.
+
+#                            1           5             10             15             20             25             30             35             40             45             50
+#                            0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+
+"update | Strong"   	     0	0  0  0  0  0  0  0  1  0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"update | Simple"   	     0	0  0  0  0  0  0  0  1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 1  0  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0
+"update | Number"	     0	0  0  0  0  0  0  0  1	0  0  0	 0  0  0  0  0	0  0  0	 0  0  0  0  0	0  0  0	 0  1  0  0  0	0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0	0

@@ -1,0 +1,57 @@
+#  [1] "(Intercept)"                                 
+#  [2] "classifierMahalanobisKNN"                    
+#  [3] "classifierSVM"                               
+#  [4] "datasetSimple"                               
+#  [5] "datasetNumber"                               
+#  [6] "Hold-"                                       
+#  [7] "DD-"                                         
+#  [8] "UD-"                                         
+#  [9] "classifierMahalanobisKNN:datasetSimple"      
+# [10] "classifierSVM:datasetSimple"                 
+# [11] "classifierMahalanobisKNN:datasetNumber"      
+# [12] "classifierSVM:datasetNumber"                 
+# [13] "Hold-:DD-"                                   
+# [14] "Hold-:UD-"                                   
+# [15] "DD-:UD-"                                     
+# [16] "classifierMahalanobisKNN:Hold-"              
+# [17] "classifierSVM:Hold-"                         
+# [18] "classifierMahalanobisKNN:DD-"                
+# [19] "classifierSVM:DD-"                           
+# [20] "classifierMahalanobisKNN:UD-"                
+# [21] "classifierSVM:UD-"                           
+# [22] "datasetSimple:Hold-"                         
+# [23] "datasetNumber:Hold-"                         
+# [24] "datasetSimple:DD-"                           
+# [25] "datasetNumber:DD-"                           
+# [26] "datasetSimple:UD-"                           
+# [27] "datasetNumber:UD-"                           
+# [28] "classifierMahalanobisKNN:Hold-:DD-"          
+# [29] "classifierSVM:Hold-:DD-"                     
+# [30] "classifierMahalanobisKNN:Hold-:UD-"          
+# [31] "classifierSVM:Hold-:UD-"                     
+# [32] "classifierMahalanobisKNN:DD-:UD-"            
+# [33] "classifierSVM:DD-:UD-"                       
+# [34] "datasetSimple:Hold-:DD-"                     
+# [35] "datasetNumber:Hold-:DD-"                     
+# [36] "datasetSimple:Hold-:UD-"                     
+# [37] "datasetNumber:Hold-:UD-"                     
+# [38] "datasetSimple:DD-:UD-"                       
+# [39] "datasetNumber:DD-:UD-"                       
+# [40] "classifierMahalanobisKNN:datasetSimple:Hold-"
+# [41] "classifierSVM:datasetSimple:Hold-"           
+# [42] "classifierMahalanobisKNN:datasetNumber:Hold-"
+# [43] "classifierSVM:datasetNumber:Hold-"           
+
+base MKNN SVM Sim Num H- DD- UD- MKNN:Sim SVM:Sim MKNN:Num SVM:Num H-:DD- H-:UD- DD-:UD- MKNN:H- SVM:H- MKNN:DD- SVM:DD- MKNN:UD- SVM:UD- Sim:H- Num:H- Sim:DD- Num:DD- Sim:UD- Num:UD- MKNN:H-:DD- SVM:H-:DD- MKNN:H-:UD- SVM:H-:UD- MKNN:DD-:UD- SVM:DD-:UD- Sim:H-:DD- Num:H-:DD- Sim:Hold-:UD- Num:H-:UD- Sim:DD-:UD- Num:DD-:UD- MKNN:Sim:H- SVM:Sim:H- MKNN:Num:H- SVM:Num:H-
+
+# Calculate the average effect for each combination of features
+
+#          1               5                  10                  15                  20                  25                  30                  35                  40          43
+
+"H"        1 .33 .33 .33 .33   0   1   1 .17 .17 .17 .17   0   0   1   0   0 .33 .33 .33 .33   0   0 .33 .33 .33 .33   0   0   0   0 .33 .33   0   0   0   0 .33 .33   0   0   0   0
+"DD"       1 .33 .33 .33 .33   1   0   1 .17 .17 .17 .17   0   1   0 .33 .33   0   0 .33 .33 .33 .33   0   0 .33 .33   0   0 .33 .33   0   0   0   0 .33 .33   0   0 .17 .17 .17 .17
+"UD"       1 .33 .33 .33 .33   1   1   0 .17 .17 .17 .17   1   0   0 .33 .33 .33 .33   0   0 .33 .33 .33 .33   0   0 .33 .33   0   0   0   0 .33 .33   0   0   0   0 .17 .17 .17 .17
+"H+DD"     1 .33 .33 .33 .33   0   0   1 .17 .17 .17 .17   0   0   0   0   0   0   0 .33 .33   0   0   0   0 .33 .33   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+"H+UD"     1 .33 .33 .33 .33   0   1   0 .17 .17 .17 .17   0   0   0   0   0 .33 .33   0   0   0   0 .33 .33   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+"DD+UD"    1 .33 .33 .33 .33   1   0   0 .17 .17 .17 .17   0   0   0 .33 .33   0   0   0   0 .33 .33   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 .17 .17 .17 .17
+"H+DD+UD"  1 .33 .33 .33 .33   0   0   0 .17 .17 .17 .17   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
